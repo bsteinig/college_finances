@@ -25,6 +25,10 @@ function LoginScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Login Screen</Text>
+      <Button
+        title="Sign In"
+        onPress={() => navigation.navigate('Sign In')}
+      />
     </View>
   );
 }
@@ -33,6 +37,14 @@ function RegistrationScreen() {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Regristration Screen</Text>
+    </View>
+  );
+}
+
+function AccountScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Account Screen</Text>
     </View>
   );
 }
@@ -46,6 +58,7 @@ function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Regristration" component={RegistrationScreen} />
+        <Stack.Screen name="Sign In" component={AccountScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
