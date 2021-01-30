@@ -1,13 +1,58 @@
 // The screen that has all of the users financial data, After login
+// components/dashboard.js
+import React, { Component } from 'react';
+import { StyleSheet, View, Text, Button } from 'react-native';
+import firebase from '../database/firebase';
 
+export default class Dashboard extends Component {
+  constructor() {
+    super();
+    this.state = { 
+      uid: ''
+    }
+  }
 
-function AccountScreen() {
+  signOut = () => {
+    firebase.auth().signOut().then(() => {
+      this.props.navigation.navigate('Home')
+    })
+    .catch(error => this.setState({ errorMessage: error.message }))
+  }  
+
+  render() {
+    this.state = { 
+      displayName: firebase.auth().currentUser.displayName,
+      uid: firebase.auth().currentUser.uid
+    }    
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Account Screen</Text>
+      <View style={styles.container}>
+        <Text style = {styles.textStyle}>
+          Hello, {this.state.displayName}!
+          <br/>{this.state.uid}
+        </Text>
+
+        <Button
+          color="#3740FE"
+          title="Logout"
+          onPress={() => this.signOut()}
+        />
       </View>
     );
+  }
 }
 
-export default AccountScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    display: "flex",
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 35,
+    backgroundColor: '#fff'
+  },
+  textStyle: {
+    fontSize: 15,
+    marginBottom: 20
+  }
+});
 
